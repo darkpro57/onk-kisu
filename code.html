@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Her Out</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #add8e6; /* Blue background */
+    color: red; /* Red text color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    text-align: center;
+    position: relative; /* Ensure relative positioning for absolute positioning of the button */
+  }
+  .btn {
+    background-color: #008000; /* Green color for Yes button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  #no-btn {
+    background-color: #ff0000; /* Red color for No button */
+  }
+  #thank-you-msg {
+    display: none;
+    font-size: 24px;
+    margin-top: 20px;
+    animation: zoomInUp 0.5s ease forwards;
+  }
+  img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  @keyframes zoomInUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <img src="https://media2.giphy.com/media/wqa57L92A9Rgaz5c4H/200.webp?cid=790b7611k6kasp61gg8u4r03z98q2qui0u3wx4qh0ijzml03&ep=v1_gifs_search&rid=200.webp&ct=g" alt="Question 1">
+  <h2 id="question">Will you marry me? Mashu.</h2>
+  <button id="no-btn" class="btn">No</button>
+  <button id="yes-btn" class="btn">Yes</button>
+  <div id="thank-you-msg">Thank you so much! Ummmmaaahhh</div>
+</div>
+<script>
+  var questions = [
+    "Soch lo, option bura nehi hae",
+    "Please man jao na!"
+  ];
+
+  var gifs = [
+    " https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3J3ZThwN2RjZnpodTViNnBnOGhjaWV1MGlscXJkbzNlcm4ydXg1biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/H8DietxBNO5YvxjLk7/200.webp",
+    "https://media0.giphy.com/media/YZOsKxJfmvzG0/200w.webp?cid=ecf05e474lic1dk2wdhdwi60iuxdkj9u6hhxfxarucexsvkt&ep=v1_gifs_related&rid=200w.webp&ct=g"
+  ];
+
+  var currentQuestion = 0;
+
+  document.getElementById('no-btn').addEventListener('click', function() {
+    if (currentQuestion < questions.length) {
+      document.getElementById('question').textContent = questions[currentQuestion];
+      document.querySelector('img').src = gifs[currentQuestion];
+      currentQuestion++;
+    }
+
+    // Floating effect for "No" button on the last question
+    if (currentQuestion === questions.length) {
+      var container = document.querySelector('.container');
+      var x = Math.random() * (container.offsetWidth - this.offsetWidth);
+      var y = Math.random() * (container.offsetHeight - this.offsetHeight);
+      this.style.position = 'absolute';
+      this.style.left = x + 'px';
+      this.style.top = y + 'px';
+      this.disabled = true; // Disable clicking on the button
+    }
+  });
+
+  document.getElementById('yes-btn').addEventListener('click', function() {
+    document.getElementById('question').style.display = 'none';
+    document.getElementById('no-btn').style.display = 'none';
+    this.style.display = 'none';
+    document.getElementById('thank-you-msg').style.display = 'block';
+  });
+</script>
+</body>
+</html>
